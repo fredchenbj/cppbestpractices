@@ -7,10 +7,8 @@ An automated framework for executing these tools should be established very earl
 Source control is an absolute necessity for any software development project. If you are not using one yet, start using one.
 
  * [GitHub](https://github.com/) - allows for unlimited public repositories, and unlimited private repositories with up to 3 collaborators.
- * [Bitbucket](https://bitbucket.org/) - allows for unlimited private repositories with up to 5 collaborators, for free.
- * [SourceForge](http://sourceforge.net/) - open source hosting only.
  * [GitLab](https://gitlab.com/) - allows for unlimited public and private repositories, unlimited CI Runners included, for free.
- * [Visual Studio Online](https://visualstudio.com) (http://www.visualstudio.com/what-is-visual-studio-online-vs) - allows for unlimited public repositories, must pay for private repository. Repositories can be git or TFVC. Additionally: Issue tracking, project planning (multiple Agile templates, such as SCRUM), integrated hosted builds, integration of all this into Microsoft Visual Studio. Windows only.
+
 
 ## Build Tool
 
@@ -24,17 +22,8 @@ Use an industry standard widely accepted build tool. This prevents you from rein
    * Consider: https://github.com/cheshirekow/cmake_format for automatic formatting of your CMakeLists.txt
    * See the [Further Reading](10-Further_Reading.md) section for CMake specific best practices
    * `cmake --build` provides a common interface for compiling your project regardless of platform
- * [Waf](https://waf.io/)
- * [FASTBuild](http://www.fastbuild.org/)
  * [Ninja](https://ninja-build.org/) - Can greatly improve the incremental build time of your larger projects. Can be used as a target for CMake.
  * [Bazel](http://bazel.io/) - Fast incremental builds using network artefact caching and remote execution.
- * [Buck](http://buckbuild.com/) - Similar to Bazel, with very good support for iOS and Andoid.
- * [gyp](https://chromium.googlesource.com/external/gyp/) - Google's build tool for chromium.
- * [maiken](https://github.com/Dekken/maiken) - Crossplatform build tool with Maven-esque configuration style.
- * [Qt Build Suite](http://doc.qt.io/qbs/) - Crossplatform build tool From Qt.
- * [meson](http://mesonbuild.com/index.html) - Open source build system meant to be both extremely fast, and, even more importantly, as user friendly as possible.
- * [premake](https://premake.github.io/) 
- * [xmake](https://xmake.io) - A cross-platform build utility based on Lua. Modern C/C++ build tools, Support multi-language hybrid compilation
 
 Remember, it's not just a build tool, it's also a programming language. Try to maintain good clean build scripts and follow the recommended practices for the tool you are using.
 
@@ -48,7 +37,6 @@ Package management is an important topic in C++, with currently no clear winner.
  * [qpm](https://www.qpm.io/) - Package manager for Qt
  * [build2](https://build2.org/) - cargo-like package management for C++
  * [Buckaroo](https://buckaroo.pm) - Truly decentralized cross-platform dependency manager for C/C++ and more
- * [Vcpkg](https://github.com/microsoft/vcpkg) - Microsoft C++ Library Manager for Windows, Linux, and MacOS - [description](https://docs.microsoft.com/en-us/cpp/build/vcpkg)
 
 ## Continuous Integration
 
@@ -63,22 +51,6 @@ Continuous Integration (CI) tools automatically build the source code as changes
  * [AppVeyor](http://www.appveyor.com/)
    * supports Windows, MSVC and MinGW
    * free for public repositories on GitHub
- * [Hudson CI](http://hudson-ci.org/) / [Jenkins CI](https://jenkins-ci.org/)
-   * Java Application Server is required
-   * supports Windows, OS X, and Linux
-   * extendable with a lot of plugins
- * [TeamCity](https://www.jetbrains.com/teamcity)
-   * has a free option for open source projects
- * [Decent CI](https://github.com/lefticus/decent_ci)
-   * simple ad-hoc continuous integration that posts results to GitHub
-   * supports Windows, OS X, and Linux
-   * used by [ChaiScript](http://chaiscript.com/ChaiScript-BuildResults/full_dashboard.html)
- * [Visual Studio Online](https://visualstudio.com) (http://www.visualstudio.com/what-is-visual-studio-online-vs)
-   * Tightly integrated with the source repositories from Visual Studio Online
-   * Uses MSBuild (Visual Studio's build engine), which is available on Windows, OS X and Linux
-   * Provides hosted build agents and also allows for user-provided build agents
-   * Can be controlled and monitored from within Microsoft Visual Studio
-   * On-Premise installation via Microsoft Team Foundation Server
  * [GitLab](https://gitlab.com)
    * use custom Docker images, so can be used for C++
    * has free shared runners
@@ -128,44 +100,12 @@ Consider using `-Weverything` and disabling the few warnings you need to on Clan
 
 `-Weffc++` warning mode can be too noisy, but if it works for your project, use it also.
 
-### MSVC
-
-`/permissive-` - [Enforces standards conformance](https://docs.microsoft.com/en-us/cpp/build/reference/permissive-standards-conformance).
-
-`/W4 /w14640` - use these and consider the following (see descriptions below)
-
- * `/W4` All reasonable warnings
- * `/w14242` 'identfier': conversion from 'type1' to 'type1', possible loss of data
- * `/w14254` 'operator': conversion from 'type1:field_bits' to 'type2:field_bits', possible loss of data
- * `/w14263` 'function': member function does not override any base class virtual member function
- * `/w14265` 'classname': class has virtual functions, but destructor is not virtual instances of this class may not be destructed correctly
- * `/w14287` 'operator': unsigned/negative constant mismatch
- * `/we4289` nonstandard extension used: 'variable': loop control variable declared in the for-loop is used outside the for-loop scope
- * `/w14296` 'operator': expression is always 'boolean_value'
- * `/w14311` 'variable': pointer truncation from 'type1' to 'type2'
- * `/w14545` expression before comma evaluates to a function which is missing an argument list
- * `/w14546` function call before comma missing argument list
- * `/w14547` 'operator': operator before comma has no effect; expected operator with side-effect
- * `/w14549` 'operator': operator before comma has no effect; did you intend 'operator'?
- * `/w14555` expression has no effect; expected expression with side-effect
- * `/w14619` pragma warning: there is no warning number 'number'
- * `/w14640` Enable warning on thread un-safe static member initialization
- * `/w14826` Conversion from 'type1' to 'type_2' is sign-extended. This may cause unexpected runtime behavior.
- * `/w14905` wide string literal cast to 'LPSTR'
- * `/w14906` string literal cast to 'LPWSTR'
- * `/w14928` illegal copy-initialization; more than one user-defined conversion has been implicitly applied
-
-Not recommended
-
- * `/Wall` - Also warns on files included from the standard library, so it's not very useful and creates too many extra warnings.
-
-
 
 ### General
 
 Start with very strict warning settings from the beginning. Trying to raise the warning level after the project is underway can be painful.
 
-Consider using the *treat warnings as errors* setting. `/WX` with MSVC, `-Werror` with GCC / Clang
+Consider using the *treat warnings as errors* setting. `-Werror` with GCC / Clang
 
 ## LLVM-based tools
 
@@ -222,9 +162,6 @@ Also, [CodeChecker](https://github.com/Ericsson/CodeChecker) is available as a f
 
 `clang-tidy` can be easily used with Visual Studio via the [Clang Power Tools](https://clangpowertools.com) extension.
 
-### MSVC's Static Analyzer
-
-Can be enabled with the `/analyze` [command line option](http://msdn.microsoft.com/en-us/library/ms173498.aspx). For now we will stick with the default options.
 
 ### Flint / Flint++
 
@@ -242,13 +179,6 @@ Both of these tools from [JetBrains](https://www.jetbrains.com/cpp/) offer some 
 
 The Eclipse based [Cevelop](https://www.cevelop.com/) IDE has various static analysis and refactoring / code fix tools available. For example, you can replace macros with C++ `constexprs`, refactor namespaces (extract/inline `using`, qualify name), and refactor your code to C++11's uniform initialization syntax. Cevelop is free to use.
 
-### Qt Creator
-
-Qt Creator can plug into the clang static analyzer.
-
-### clazy
-
-[clazy](https://github.com/KDE/clazy) is a clang based tool for analyzing Qt usage.
 
 ### IKOS
 
