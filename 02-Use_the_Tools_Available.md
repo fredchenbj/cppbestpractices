@@ -22,8 +22,9 @@ Use an industry standard widely accepted build tool. This prevents you from rein
    * Consider: https://github.com/cheshirekow/cmake_format for automatic formatting of your CMakeLists.txt
    * See the [Further Reading](10-Further_Reading.md) section for CMake specific best practices
    * `cmake --build` provides a common interface for compiling your project regardless of platform
- * [Ninja](https://ninja-build.org/) - Can greatly improve the incremental build time of your larger projects. Can be used as a target for CMake.
+ * [Ninja](https://ninja-build.org/) - Can greatly improve the incremental build time of your larger projects. Can be used as a target for CMake. It is used by ClickHouse.
  * [Bazel](http://bazel.io/) - Fast incremental builds using network artefact caching and remote execution.
+ * [SCons](https://www.scons.org/) - A software construction tool is used by MongoDB.
 
 Remember, it's not just a build tool, it's also a programming language. Try to maintain good clean build scripts and follow the recommended practices for the tool you are using.
 
